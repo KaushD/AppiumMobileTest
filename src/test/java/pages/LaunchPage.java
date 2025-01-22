@@ -6,7 +6,7 @@ import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import utils.ScreenshotUtil;
+//import utils.ScreenshotUtil;
 
 import java.time.Duration;
 
@@ -20,17 +20,17 @@ public class LaunchPage {
     }
 
     //Android Locators
-    @FindBy(xpath = "//android.widget.Button[@text=\"Create an account\"]")
-    private WebElement androidCreateAccount;
+    @FindBy(xpath = "//android.widget.TextView[@text=\"Accessibility\"]")
+    private WebElement androidAccessibility;
 
-    @FindBy(xpath = "//android.widget.TextView[@text=\"Log in\"]")
+    @FindBy(xpath = "//android.widget.TextView[@text=\"App\"]")
     private WebElement androidLoginWithEmail;
 
 
 
     //iOS Locators - to be updated
-    @FindBy(xpath = "//android.widget.TextView[@text=\"Log in\"]")
-    private WebElement iosLoginWithEmail;
+    @FindBy(xpath = "//android.widget.TextView[@text=\"Accessibility\"]\n")
+    private WebElement iosAccessibility;
 
 
 
@@ -45,7 +45,7 @@ public class LaunchPage {
     }
 
     //Actions
-    public void clickLoginWithEmail() {
+    public void clickAccessibility() {
 
 //         1. Working
 //          driver.findElement(By.xpath("//android.widget.TextView[@text=\"Log in with email\"]")).click();
@@ -54,13 +54,13 @@ public class LaunchPage {
       //  androidLoginWithEmail.click();
 
 // 3. working
-        WebElement loginWithEmail= getPlatformName().equalsIgnoreCase("Android")? androidLoginWithEmail : iosLoginWithEmail;
-        loginWithEmail.click();
-        System.out.println("Logged in with Email");
+        WebElement accessibility= getPlatformName().equalsIgnoreCase("Android")? androidAccessibility : iosAccessibility;
+        accessibility.click();
+        System.out.println("Navigated to the Accessibility screen");
 
-        test.log(Status.PASS, "Landed on user registration screen");
-        String screenshotPath = ScreenshotUtil.captureScreenshot(driver, "TestScreenshot");
-        test.addScreenCaptureFromPath(screenshotPath);
+//        test.log(Status.PASS, "Landed on user registration screen");
+//        String screenshotPath = ScreenshotUtil.captureScreenshot(driver, "TestScreenshot");
+//        test.addScreenCaptureFromPath(screenshotPath);
     }
 
 
