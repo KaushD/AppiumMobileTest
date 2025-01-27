@@ -26,8 +26,6 @@ public class LaunchPage {
     @FindBy(xpath = "//android.widget.TextView[@text=\"App\"]")
     private WebElement androidLoginWithEmail;
 
-
-
     //iOS Locators - to be updated
     @FindBy(xpath = "//android.widget.TextView[@text=\"Accessibility\"]\n")
     private WebElement iosAccessibility;
