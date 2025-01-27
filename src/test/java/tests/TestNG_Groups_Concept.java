@@ -2,7 +2,7 @@ package tests;
 
 import org.testng.annotations.Test;
 
-public class TestNG_Groups_Concept
+public class TestNG_Groups_Concept extends BaseClass
 {
     @Test (groups = {"smoke"})
     public void test1(){

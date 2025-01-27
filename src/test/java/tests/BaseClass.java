@@ -2,6 +2,7 @@ package tests;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
@@ -11,12 +12,16 @@ import org.testng.annotations.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Properties;
+import utils.ExtentReportManager;
+import utils.ScreenshotUtil;
 
 
-public class POC_Base {
+//@Listeners(ChainTestListener.class)
+public class BaseClass {
     AppiumDriver driver;
     ExtentReports extent;
     ExtentSparkReporter spark;
@@ -25,6 +30,10 @@ public class POC_Base {
 
     @BeforeSuite(groups = {"smoke"})
     public void frameworkBase() throws IOException {
+
+        ExtentReportManager.initReport(System.getProperty("user.dir") + "/test-output/ExtentReport.html");
+      //  ExtentSparkReporter spark = new ExtentSparkReporter("//src/main/java/reports/TestResults.html");
+
 
         FileInputStream fis = new FileInputStream(System.getProperty("user.dir") + "/src/main/java/global.properties");
 
@@ -82,6 +91,16 @@ public class POC_Base {
             e.printStackTrace();
         }
     }
+    @BeforeMethod
+    public void setupTest(Method method) {
+        ExtentTest test = ExtentReportManager.getExtent().createTest(method.getName());
+        ExtentReportManager.setTest(test);
+
+        // Capture screenshot
+        test.log(Status.PASS, "Test pass");
+        String screenshotPath = ScreenshotUtil.captureScreenshot(driver, "TestScreenshot");
+        test.addScreenCaptureFromPath(screenshotPath);
+    }
 
     @Test
     public void test1() {
@@ -96,6 +115,6 @@ public class POC_Base {
         if(driver !=null){
             driver.quit();
         }
-        extent.flush();
+        ExtentReportManager.flushReport();
     }
 }

@@ -2,7 +2,7 @@ package tests;
 
 import org.testng.annotations.Test;
 
-public class TestNG_Loan {
+public class TestNG_Loan extends BaseClass {
 
     @Test
     public void loan1(){

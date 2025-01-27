@@ -1,24 +1,29 @@
 package tests;
 
 import org.testng.annotations.Test;
+import pages.AccessibilityNodeProviderPage;
 import pages.AccessibilityPage;
 import pages.LaunchPage;
 
-public class POC_AccessibilityTest extends POC_Base {
+public class AccessibilityTest extends BaseClass {
 
     private LaunchPage launchPage =new LaunchPage(driver);
     private AccessibilityPage accessibilityPage = new AccessibilityPage(driver);
+    private AccessibilityNodeProviderPage nodeProvider = new AccessibilityNodeProviderPage(driver);
 
-    @Test (groups = {"smoke"})
+    @Test (groups = {"regression"})
     public void validateAccessibility(){
         launchPage = new LaunchPage(driver);
         accessibilityPage = new AccessibilityPage(driver);
         System.out.println("Launch Page");
         launchPage.clickAccessibility();
         accessibilityPage.validateAccessibility1();
-//        accessibilityPage.enterEmail("test2@yopmail.com");
-//        accessibilityPage.enterPassword("test12345");
-//        accessibilityPage.clickLogin();
+    }
+
+    @Test (groups = {"regression"})
+    public void validateNodeProvider(){
+        accessibilityPage.clickAccessibility1();
+        nodeProvider.validatePageContent();
     }
 
 

@@ -2,7 +2,7 @@ package tests;
 
 import org.testng.annotations.Test;
 
-public class TestNG_PaymentByCard {
+public class TestNG_PaymentByCard extends BaseClass {
 
     @Test
     public void cardPayment1(){

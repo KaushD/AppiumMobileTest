@@ -32,12 +32,6 @@ public class LaunchPage {
 
 
 
-    // Android Locators
-    //pageTitle
-    //description
-
-
-
     private String getPlatformName() {
         return driver.getCapabilities().getCapability("platformName").toString();
     }
@@ -54,7 +48,7 @@ public class LaunchPage {
 // 3. working
         WebElement accessibility= getPlatformName().equalsIgnoreCase("Android")? androidAccessibility : iosAccessibility;
         accessibility.click();
-        System.out.println("Navigated to the Accessibility screen");
+       // System.out.println("Navigated to the Accessibility screen");
 
 //        test.log(Status.PASS, "Landed on user registration screen");
 //        String screenshotPath = ScreenshotUtil.captureScreenshot(driver, "TestScreenshot");

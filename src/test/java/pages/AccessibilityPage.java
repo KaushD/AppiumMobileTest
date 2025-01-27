@@ -16,33 +16,18 @@ public class AccessibilityPage {
     AppiumDriver driver;
 
     // Android Locators
-    @AndroidFindBy(xpath = "//android.widget.EditText[@text=\"Accessibility Node Provider\"]")
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text=\"Accessibility Node Provider\"]")
     private WebElement androidAccessibilityOption1;
 
-    @AndroidFindBy(xpath = "//android.widget.EditText[@text=\"Accessibility Node Querying\"]")
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text=\"Accessibility Node Querying\"]")
     private WebElement accessibilityOption2;
 
-    @AndroidFindBy(xpath = "//android.widget.EditText[@text=\"Accessibility Service\"]")
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text=\"Accessibility Service\"]")
     private WebElement accessibilityOption3;
 
-    @AndroidFindBy(xpath = "//android.widget.EditText[@text=\"Custom View\"]")
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text=\"Custom View\"]")
     private WebElement accessibilityOption4;
 
-
-
-    @FindBy(id = "com.yourcompany:id/username")
-    private WebElement usernameField;
-
-    @FindBy(xpath="//android.widget.TextView[@index=1]" )
-    private WebElement androidPageTitle;
-
-    @FindBy(xpath = "//android.widget.EditText[@resource-id=\"com.apidemo:id/email_field\"]")
-    private WebElement androidEnterEmail;
-
-
-
-    @AndroidFindBy(xpath = "//android.widget.Button[@text=\"Log in\"]")
-    private WebElement androidLogin;
 
     //iOS Locators
     @AndroidFindBy(xpath = "//android.widget.EditText[@text=\"Accessibility Node Provider\"]")
@@ -74,6 +59,13 @@ public class AccessibilityPage {
     public void validateAccessibility1(){
            WebElement accessibility = getPlatformName().equalsIgnoreCase("Android")? androidAccessibilityOption1 : iosAccessibilityOption1;
                 Assert.assertEquals (accessibility.getText(),"Accessibility Node Provider");
+    }
+
+    public void clickAccessibility1(){
+        WebElement accessibility = getPlatformName().equalsIgnoreCase("Android")? androidAccessibilityOption1 : iosAccessibilityOption1;
+        accessibility.click();
+        //Assert.assertEquals (accessibility.getText(),"Accessibility Node Provider");
+
     }
 
 //    public void verifyTitle(){

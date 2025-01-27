@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+    <test name="Smoke">
+        <groups>
+            <run>
+                <include name="smoke"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="tests.TestNG_Groups_Concept"/>
+            <class name="tests.TestNG_PaymentByCard"/>
+            <class name="tests.TestNG_Loan"/>
+        </classes>
+    </test>
+
+
+    <test name="Regression">
+        <groups>
+            <run>
+                <include name="regression"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="tests.AccessibilityTest"></class>
+            <class name="tests.TestNG_Groups_Concept"/>
+        </classes>
+    </test>
+</suite>
