@@ -16,6 +16,8 @@ import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Properties;
+
+import software.amazon.awssdk.services.s3.endpoints.internal.Value;
 import utils.ExtentReportManager;
 import utils.ScreenshotUtil;
 
@@ -28,11 +30,14 @@ public class BaseClass {
     ExtentTest test;
     AndroidDriver driver2;
 
+    UiAutomator2Options options = new UiAutomator2Options();
+
     @BeforeSuite(groups = {"smoke"})
+//    @BeforeTest
     public void frameworkBase() throws IOException {
 
         ExtentReportManager.initReport(System.getProperty("user.dir") + "/test-output/ExtentReport.html");
-      //  ExtentSparkReporter spark = new ExtentSparkReporter("//src/main/java/reports/TestResults.html");
+        //  ExtentSparkReporter spark = new ExtentSparkReporter("//src/main/java/reports/TestResults.html");
 
 
         FileInputStream fis = new FileInputStream(System.getProperty("user.dir") + "/src/main/java/global.properties");
@@ -45,13 +50,14 @@ public class BaseClass {
         String deviceName = (String) prop.get("deviceName");
         String platformVersion = (String) prop.get("platformVersion");
         String udid = (String) prop.get("udid");
+        String packageName = (String) prop.get("packageName");
+        String appActivityName = (String) prop.get("appActivityName");
 
 //        File appDir = new File("src");
         File appDir = new File("src/main/resources/apps/");
 
         File app = new File(appDir, appName);
 
-        UiAutomator2Options options = new UiAutomator2Options();
 
         if (platform.equalsIgnoreCase("Android")) {
             System.out.println("Platform :" + platform);
@@ -60,10 +66,10 @@ public class BaseClass {
             options.setDeviceName(deviceName); // Replace with your device name
             options.setPlatformVersion(platformVersion); // Replace with your Android version
             options.setUdid(udid);
-//        options.setAppPackage("com.example.app"); // Replace with your app's package name
-//        options.setAppActivity("com.example.app.MainActivity"); // Replace with your app's main activity
+            options.setAppPackage(packageName); // Replace with your app's package name
+            options.setAppActivity(appActivityName); // Replace with your app's main activity
             options.setAutomationName("UiAutomator2");
-            options.setApp(app.getAbsolutePath());
+            // options.setApp(app.getAbsolutePath());
         }
 
         if (platform.equalsIgnoreCase("iOS")) {
@@ -78,19 +84,22 @@ public class BaseClass {
             options.setAutomationName("XCUITest");
             options.setApp(app.getAbsolutePath());
         }
+    }
 
+    @BeforeMethod
+    public void driverInitialisation(){
         // Initialize the driver
         try {
             URL serverURL = new URL("http://127.0.0.1:4723/");
             driver = new AppiumDriver(serverURL, options);
             System.out.println("Initialize the driver");
 
-
         } catch (
                 MalformedURLException e) {
             e.printStackTrace();
         }
     }
+
     @BeforeMethod
     public void setupTest(Method method) {
         ExtentTest test = ExtentReportManager.getExtent().createTest(method.getName());
@@ -99,7 +108,7 @@ public class BaseClass {
         // Capture screenshot
         test.log(Status.PASS, "Test pass");
         String screenshotPath = ScreenshotUtil.captureScreenshot(driver, "TestScreenshot");
-        test.addScreenCaptureFromPath(screenshotPath);
+       // test.addScreenCaptureFromPath(screenshotPath);
     }
 
     @Test
@@ -107,6 +116,12 @@ public class BaseClass {
         System.out.println("Device connection established");
     }
 
+//    @AfterMethod
+//    public void closeApp(){
+//        if (driver != null) {
+//            driver.close();
+//            ExtentReportManager.getTest().info("App closed after test execution.");
+//        }    }
 
     @AfterSuite
     public void teardown(){
