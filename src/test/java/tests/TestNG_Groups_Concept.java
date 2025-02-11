@@ -18,8 +18,4 @@ public class TestNG_Groups_Concept extends BaseClass
     public void test3(){
         System.out.println("test3");
     }
-
-
-
-
 }
