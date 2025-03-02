@@ -8,7 +8,8 @@
 
 ## Appium 2 Architecture
 
-![image](https://github.com/user-attachments/assets/25de115d-ed6f-4b9b-8cfb-fa2862706229)
+![image](https://github.com/user-attachments/assets/9e45e3d5-a221-481b-b3a5-548833ab7ce5)
+
 
 
 ### Key Components in Appium 2 Architecture:
